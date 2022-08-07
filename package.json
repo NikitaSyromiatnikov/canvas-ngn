@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/NikitaSyromiatnikov/canvas-ngn.git",
-  "author": "Mykyta Syromiatnikov <msyromiatnikov@playtika.com>",
+  "author": "Mykyta Syromiatnikov <nikitasyromiatnikovdev@gmail.com>",
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
