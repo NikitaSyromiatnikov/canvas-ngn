@@ -62,7 +62,6 @@ export class Game implements IGame {
 
     private subscribeOnWindowResize() {
         window.onresize = () => {
-            console.log('onresize');
             this.canvas.width = window.innerWidth;
             this.canvas.height = Math.floor(window.innerWidth / this.aspectRatio);
         }
