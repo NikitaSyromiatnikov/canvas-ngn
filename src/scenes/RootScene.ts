@@ -1,28 +1,25 @@
 import { Engine } from "../../engine";
-import { Sprite } from "../../engine/sprite/Sprite";
+import { RenderingStrategy, Sprite } from "../../engine/sprite/Sprite";
 
 export class RootScene extends Engine.Scene {
-    private readonly assetTag: string;
+    private readonly assetTags: string[];
 
     constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
         super(canvas, context);
-        this.assetTag = "./assets/root-scene/root-scene-bg.png";
+        this.assetTags = [
+            "./assets/root-scene/root-scene-bg.png",
+            "./assets/root-scene/root-scene-item.png"
+        ];
         this.initialize();
     }
 
     private initialize() {
-        this.spriteFactory.create(this.assetTag, this.renderInternal.bind(this));
-    }
-
-    public override render() {
-
-    }
-
-
-    private renderInternal(sprite: Sprite) {
-        setInterval(() => {
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.context.drawImage(sprite.image, 0, 0, sprite.boundingRect.width, sprite.boundingRect.height, 0, 0, this.canvas.width, this.canvas.height);
-        }, 1000 / 60);
+        this.spriteFactory.create(this.assetTags[0] as string, (background: Sprite) => {
+            this.spriteFactory.create(this.assetTags[1] as string, (image: Sprite) => {
+                background.setRenderingStrategy(RenderingStrategy.FILL);
+                background.addChild(image);
+                this.renderer.addToRenderQueue(background);
+            });
+        });
     }
 }
